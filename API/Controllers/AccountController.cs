@@ -5,6 +5,7 @@ using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using API.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,11 @@ namespace API.Controllers
 {
     public class AccountController(AppDbContext context, ITokenService tokenService) : BaseApiController
     {
+        [AllowAnonymous]
         [HttpPost("register")] //api/account/register
         public async Task<ActionResult<AppUser>> Register(RegisterDto registerDto)
         {
-            if(await this.EmailExists(registerDto.Email)) return BadRequest("Email taken");
+            //if(await this.EmailExists(registerDto.Email)) return BadRequest("Email taken");
 
             using var hmac = new HMACSHA512();
 
