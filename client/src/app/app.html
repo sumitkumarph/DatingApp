@@ -1,3 +1,8 @@
 <app-nav/>
 
-<app-home [membersFromApp]="this.members()"/>
+<div
+[class.mt-24]="router.url !== '/'"
+[class.container]="router.url !== '/'"
+[class.max-auto]="router.url !== '/'">
+  <router-outlet />
+</div>
