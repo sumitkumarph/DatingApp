@@ -16,8 +16,13 @@
       <a routerLink="/members" routerLinkActive="text-accent" [routerLinkActiveOptions]="{exact: true}">Matches</a>
       <a routerLink="/lists" routerLinkActive="text-accent">Lists</a>
       <a routerLink="/messages" routerLinkActive="text-accent">Messages</a>
+      <a routerLink="/errors" routerLinkActive="text-accent">Errors</a>
     </nav>
-    <a routerLink="/errors" routerLinkActive="text-accent">Errors</a>
+
+    @if(busyService.busyRequestCount() > 0) {
+      <span class="loading loaing-spinner text-accent"></span>
+    }
+
     }
     <div class="flex align-middle ml-auto gap-3">
       @if(this.accountService.currentUser()) {
@@ -49,7 +54,7 @@
           <span>{{user.displayName}}</span>
         </div>
         <ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-          <li><a>Edit profile</a></li>
+          <li routerLink="/members/{{user.id}}"><a>Edit profile</a></li>
           <li><a (click)="this.logout()">Logout</a></li>
         </ul>
       </div>
