@@ -10,6 +10,9 @@ import { MemberProfile } from '../features/members/member-profile/member-profile
 import { MemberPhotos } from '../features/members/member-photos/member-photos';
 import { MemberMessages } from '../features/members/member-messages/member-messages';
 import { memberResolver } from '../features/members/member-resolver';
+import { TestErrors } from '../features/test-errors/test-errors';
+import { NotFound } from '../shared/errors/not-found/not-found';
+import { ServerError } from '../shared/errors/server-error/server-error';
 
 export const routes: Routes = [
   {path:'', component: Home},
@@ -30,9 +33,11 @@ export const routes: Routes = [
           {path:'messages', component: MemberMessages, title: 'Messages'}
         ]
       },
-      {path: 'lists', component:Lists},
+      {path: 'lists', component:Lists, canActivate:[authGuard]},
       {path: 'messages', component:Messages}
     ]
   },
-  {path: '**', component:Home}
+  {path:"errors", component: TestErrors },
+  {path:"server-error", component: ServerError },
+  {path: '**', component:NotFound}
 ];

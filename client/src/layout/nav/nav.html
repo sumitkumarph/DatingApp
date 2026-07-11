@@ -17,9 +17,10 @@
       <a routerLink="/lists" routerLinkActive="text-accent">Lists</a>
       <a routerLink="/messages" routerLinkActive="text-accent">Messages</a>
     </nav>
+    <a routerLink="/errors" routerLinkActive="text-accent">Errors</a>
     }
     <div class="flex align-middle ml-auto gap-3">
-
+      @if(this.accountService.currentUser()) {
       <div class="dropdown mr-5 dropdown-end">
         <button tabindex="1"
           class="flex flex-col justify-cneter align-middle text-white cursor-pointer uppercase text-xs">
@@ -38,6 +39,8 @@
           }
         </ul>
       </div>
+    }
+
 
       @if(this.accountService.currentUser(); as user){
       <div class="dropdown dropdown-end">
